@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cont.dao.CustomerDAO">
+
+	<resultMap id="customerResultMap" type="com.cont.model.CustomerModel">
+	    <id column="Customer_id" property="customerId" jdbcType="INTEGER"/>
+	    <result column="Name" property="customerCname" jdbcType="VARCHAR"/>
+	    <result column="Sex" property="customerSex" jdbcType="INTEGER"/>
+	    <result column="Tel" property="customerPhone" jdbcType="VARCHAR"/>
+	    <result column="Email" property="customerEmail" jdbcType="VARCHAR"/>
+	    <result column="Credit_level" property="customerCreditLevel" jdbcType="INTEGER"/>
+	    <result column="Username" property="customerName" jdbcType="VARCHAR"/>
+	    <result column="Address" property="customerAddress" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <resultMap id="goodsResultMap" type="com.cont.model.GoodsModel">
+    	<id column="Goods_id" property="goodsId" jdbcType="INTEGER"/>
+    	<result column="Goods_image" property="goodsImage" jdbcType="VARCHAR"/>
+    	<result column="Name" property="goodsName" jdbcType="VARCHAR"/>
+    	<result column="Price" property="goodsPrice" jdbcType="DOUBLE"/>
+    </resultMap>
+	
+	<!-- 客户登录 -->
+    <select id="customerLogin" resultType="com.cont.model.CustomerModel">
+    	select * from customer where Username = #{customerName} and Pass_word = #{customerPassword}
+    </select>
+    
+    <!-- 客户注册 -->
+    <insert id="customerRegister" >
+		insert 
+		into customer (Sex, Credit_level, Username, Pass_word, Email) 
+		SELECT DISTINCT #{customerSex},5,#{customerName},#{customerPassword},#{customerEmail}
+		WHERE NOT EXISTS(SELECT * FROM customer WHERE customer.Username= #{customerName})
+    </insert>
+    <insert id="customerRegister2">
+    	insert
+    	into address(address.Customer_id, address.`Status`)
+    	select customer.Customer_id, '当前地址'
+    	from customer
+    	where not exists
+    	(select * from address, customer
+    	where address.Customer_id = customer.Customer_id and customer.Username = #{customerName} ) and customer.Username=#{customerName}
+    </insert>
+    
+    
+    <!-- 管理员界面客户信息展示 -->
+    <select id="customerDisplay"  resultMap="customerResultMap">
+    	select * from customer 
+    </select>
+    
+    <!-- 个人中心客户信息展示 -->
+    <select id="customerBack" resultMap="customerResultMap">
+    	select customer.`Name`, customer.Sex, customer.Tel, customer.Email, Address.Address	
+		from customer,address where customer.Username=#{customerName} and Address.Customer_id=customer.Customer_id
+    </select>
+    <!-- 顾客信息修改 -->
+    <select id="customerUpdate">
+    	update customer,Address 
+		set customer.`Name`=#{customerCname}, customer.Sex=#{customerSex}, customer.Tel=#{customerPhone}, customer.Email=#{customerEmail}, Address.Address=#{customerAddress}
+		where customer.Username=#{customerName} and Address.Customer_id=customer.Customer_id
+    </select>
+    <!-- 顾客密码修改 -->
+    <update id="PasswordUpdate">
+    	update customer
+		set Pass_word = #{newcustomerPassword}
+		where Username=#{customerName} and  Pass_word = #{customerPassword}
+    </update>
+    
+    <!-- 顾客收藏夹展示 -->
+    <select id="collectDisplay"  resultMap="goodsResultMap">
+    	SELECT goods.Goods_id,goods.`Name`,goods.Price,goods.Goods_image
+		FROM customer,collect,goods
+		WHERE customer.Customer_id=collect.Customer_id and collect.Goods_id=goods.Goods_id and customer.Username=#{customerName};
+    </select>
+    
+    <!-- 顾客收藏夹删除物品 -->
+    <select id="collectDelete"  resultType="com.cont.model.GoodsModel">
+    	DELETE
+		from collect
+		WHERE collect.Goods_id=#{goodsId} and collect.Customer_id IN
+		(SELECT customer.Customer_id
+		from customer
+		WHERE customer.Username=#{customerName});
+    </select>
+    
+    <!-- 顾客加入购物车 -->
+    <insert id="addShopping1">
+    	INSERT 
+		INTO shopping_cart(shopping_cart.Customer_id)
+		SELECT customer.Customer_id
+		from customer
+		WHERE customer.Username=#{customerName} and customer.Customer_id NOT IN(SELECT shopping_cart.Customer_id FROM shopping_cart);
+    </insert>
+    <update id="addShopping2">
+    	UPDATE shopping_cart_details,customer,shopping_cart,goods
+		set shopping_cart_details.Num=shopping_cart_details.Num+#{goodsStock},shopping_cart_details.Price=goods.Price*(shopping_cart_details.Num+#{goodsStock})
+		WHERE shopping_cart_details.Goods_id=#{goodsId} and goods.Goods_id=#{goodsId} and customer.Username=#{customerName} and 
+		customer.Customer_id=shopping_cart.Customer_id and shopping_cart_details.Shopping_cart_id=shopping_cart.Shopping_cart_id;
+    </update>
+    <insert id="addShopping3">
+    	INSERT 
+		INTO shopping_cart_details(Shopping_cart_id,Goods_id,shopping_cart_details.`Name`,Num,Price)
+		SELECT shopping_cart.Shopping_cart_id,goods.Goods_id,goods.`Name`,#{goodsStock},#{goodsStock}*goods.Price
+		FROM shopping_cart,customer,goods
+		WHERE customer.Username=#{customerName} and goods.Goods_id=#{goodsId} and customer.Customer_id=shopping_cart.Customer_id and goods.Goods_id NOT IN
+		(SELECT shopping_cart_details.Goods_id
+		FROM shopping_cart_details,customer,shopping_cart
+		WHERE customer.Username=#{customerName} and customer.Customer_id=shopping_cart.Customer_id and shopping_cart_details.Shopping_cart_id=shopping_cart.Shopping_cart_id);
+    </insert>
+    
+    <insert id="addCollect">
+    	INSERT 
+		INTO collect(collect.Customer_id,collect.Goods_id)
+		SELECT DISTINCT Y1.Customer_id,goods.Goods_id
+		FROM customer Y1,goods,collect Y2
+		WHERE Y1.Username=#{customerName} and goods.Goods_id=#{goodsId}  and goods.Goods_id not IN 
+		(SELECT Z1.Goods_id from collect Z1,customer Z2 WHERE Z1.Customer_id=Z2.Customer_id and Z2.Username=#{customerName})  
+		and (Y1.Customer_id=Y2.Customer_id OR Y1.Customer_id NOT IN (SELECT X.Customer_id from collect X));
+    </insert>
+    
+</mapper>

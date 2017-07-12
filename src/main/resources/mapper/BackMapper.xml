@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cont.dao.BackDAO">
+    
+    <resultMap id="backResultMap" type="com.cont.model.BackModel">
+    	<result column="Odetails_id" property="odetailsId" jdbcType="INTEGER"/>
+    	<result column="Goods_id" property="goodsId" jdbcType="INTEGER"/>
+    	<result column="Name" property="goodsName" jdbcType="VARCHAR"/>
+    	<result column="Num" property="backNum" jdbcType="INTEGER"/>
+    	<result column="Back_condition" property="backCondition" jdbcType="INTEGER"/>
+    	<result column="Reason" property="backReason" jdbcType="VARCHAR"/>
+    	<result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <!-- 退货单展示 -->
+    <select id="backDisplay"  resultMap="backResultMap">
+    	SELECT  back.Odetails_id,
+    			back.Goods_id,
+    			goods.`Name`,
+    			back.Num,
+    			back.Back_condition,
+    			back.Reason,
+    			back.create_time
+				from back,goods
+		WHERE back.Goods_id=goods.Goods_id;
+    </select>
+    <!-- 处理未处理的退货单 -->
+    <update id="backDeal">
+    	update back set Back_condition = 2 where Odetails_id = #{odetailsId} and Back_condition = 1
+    </update>
+    
+    <update id="backDeal2">
+    	UPDATE orders, order_details
+		SET Order_condition="完成"
+		WHERE Order_condition="退货中" and order_details.Odetails_id = #{odetailsId} and order_details.Order_id=orders.Order_id
+    </update>
+    
+    <update id="updateGoods">
+    	UPDATE order_details, goods
+    	SET goods.Stock=goods.Stock+order_details.Num
+    	WHERE order_details.Odetails_id=#{odetailsId} and order_details.Goods_id=goods.Goods_id
+    </update>
+    
+</mapper>

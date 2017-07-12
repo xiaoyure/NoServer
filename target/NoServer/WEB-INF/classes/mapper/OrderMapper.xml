@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cont.dao.OrderDAO">
+	
+	<resultMap id="orderResultMap" type="com.cont.model.OrderModel">
+    	<result column="cusName" property="orderCustomerName" jdbcType="VARCHAR"/>
+    	<result column="ordId" property="orderId" jdbcType="INTEGER"/>
+    	<result column="Order_condition" property="orderStatus" jdbcType="INTEGER"/>
+    	<result column="priceSum" property="orderSumPrice" jdbcType="DOUBLE"/>
+    	<result column="create_time" property="orderCreateTime" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <resultMap id="orderDetailResultMap" type="com.cont.model.OrderDetailModel">
+    	<result column="Goods_image" property="orderGoodsAddress" jdbcType="VARCHAR"/>
+    	<result column="goodsName" property="orderGoodsName" jdbcType="VARCHAR"/>
+    	<result column="goodsPrice" property="orderGoodsPrice" jdbcType="DOUBLE"/>
+    	<result column="orderNum" property="orderGoodsNum" jdbcType="INTEGER"/>
+    	<result column="Sum_price" property="orderGoodsSumPrice" jdbcType="DOUBLE"/>
+    </resultMap>
+    
+    <!-- 店铺订单展示 -->
+    <select id="orderDisplay"  resultMap="orderResultMap">
+    	select customer.`Name` as cusName, orders.Order_id as ordId, orders.Order_condition, orders.create_time, SUM(order_details.Sum_price) as priceSum
+		from customer, orders, order_details
+		WHERE orders.Customer_id=customer.Customer_id and orders.Order_id=order_details.Order_id
+		GROUP BY orders.Order_id
+    </select>
+    
+    <!-- 订单更新 -->
+    <update id="orderUpdateSum">
+    	UPDATE order_details,goods
+		SET order_details.Sum_price=order_details.Num*goods.Price
+		WHERE order_details.Goods_id=goods.Goods_id
+    </update>
+    
+    <!-- 店铺订单详情展示 -->
+    <select id="orderDetailDisplay"  resultMap="orderDetailResultMap">
+		SELECT  goods.Goods_image,
+				goods.`Name` as goodsName, 
+				goods.Price as goodsPrice, 
+				order_details.Num as orderNum, 
+				order_details.Sum_price
+		from order_details,goods
+		WHERE goods.Goods_id=order_details.Goods_id and order_details.Order_id=#{orderGoodsId}
+    </select>
+    
+    <!-- 顾客订单展示 -->
+    <select id="informationDisplay"  resultMap="orderResultMap">
+   		select orders.Order_id as ordId, orders.Order_condition, orders.create_time, SUM(order_details.Sum_price) as priceSum
+		from customer, orders, order_details
+		WHERE orders.Customer_id=customer.Customer_id and orders.Order_id=order_details.Order_id and customer.Username=#{orderUserName}
+   		GROUP BY order_details.Order_id
+
+	</select>
+	
+	<!-- 顾客待收货订单展示 -->
+    <select id="receiveDisplay"  resultMap="orderResultMap">
+   		select orders.Order_id as ordId, orders.Order_condition, orders.create_time, SUM(order_details.Sum_price) as priceSum
+		from customer, orders, order_details
+		WHERE orders.Customer_id=customer.Customer_id and orders.Order_id=order_details.Order_id and orders.Order_condition="未收货" and customer.Username=#{orderUserName}
+   		GROUP BY order_details.Order_id
+	</select>
+	
+	<!-- 顾客待发货订单展示 -->
+    <select id="sendDisplay"  resultMap="orderResultMap">
+   		select orders.Order_id as ordId, orders.Order_condition, orders.create_time, SUM(order_details.Sum_price) as priceSum
+		from customer, orders, order_details
+		WHERE orders.Customer_id=customer.Customer_id and orders.Order_id=order_details.Order_id and orders.Order_condition="未发货" and customer.Username=#{orderUserName}
+   		GROUP BY order_details.Order_id
+	</select>
+    
+    <!-- 顾客待评价订单展示 -->
+    <select id="CommentDisplay"  resultMap="orderResultMap">
+   		select orders.Order_id as ordId, orders.Order_condition, orders.create_time, SUM(order_details.Sum_price) as priceSum
+		from customer, orders, order_details
+		WHERE orders.Customer_id=customer.Customer_id and orders.Order_id=order_details.Order_id and orders.Order_condition="未评价" and customer.Username=#{orderUserName}
+   		GROUP BY order_details.Order_id
+	</select>
+	
+	<!-- 顾客退货订单展示 -->
+    <select id="goodsBackDisplay"  resultMap="orderResultMap">
+   		select orders.Order_id as ordId, orders.Order_condition, orders.create_time, SUM(order_details.Sum_price) as priceSum
+		from customer, orders, order_details
+		WHERE orders.Customer_id=customer.Customer_id and orders.Order_id=order_details.Order_id and orders.Order_condition="退货中" and customer.Username=#{orderUserName}
+   		GROUP BY order_details.Order_id
+	</select>
+	
+	<!-- 顾客退货操作修改订单信息 -->
+	<select id="goodsBack">
+		UPDATE orders
+		SET Order_condition="退货中" 
+		WHERE Order_id=#{orderId};
+	</select>
+	<!--  顾客退货操作在退货表中新增-->
+	<select id="goodsBackAdd">
+			insert into back(Odetails_id, goods_id, num, back_condition,reason, create_time)
+			select Odetails_id, Goods_id, num , 1 ,#{reason}, now() from order_details where Order_id= #{orderId}
+	</select>
+	
+	<!-- 顾客收货操作 -->
+	<select id="goodsReceive" resultMap="orderResultMap">
+		UPDATE orders
+		SET Order_condition="未评价"
+		WHERE Order_id=#{orderId};
+	</select>
+    
+    <!-- 顾客评价操作修改订单信息-->
+    <select id="goodsComment">
+		UPDATE orders
+		SET Order_condition="完成" 
+		WHERE Order_id=#{orderId};
+	</select>
+	<!--  顾客评价操作在评价表中新增-->
+	<select id="goodsCommentAdd">
+		insert into comment(Customer_id, Goods_id, Status, Level, Comment, comment_time)
+		select orders.Customer_id, order_details.Goods_id, #{status}, #{score}, #{comment}, now() from orders,order_details where orders.Order_id = #{orderId} and order_details.Order_id = #{orderId}
+	</select>
+	
+    <!-- 管理员发货操作 -->
+    <update id="goodsSend">
+    	UPDATE orders
+		SET Order_condition="未收货"
+		WHERE Order_id=#{orderId} and Order_condition="未发货";
+    </update>
+    
+</mapper>

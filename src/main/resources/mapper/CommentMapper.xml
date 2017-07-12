@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cont.dao.CommentDAO">
+	
+	<resultMap id="commentPageMap" type="com.cont.model.CommentModel">
+    	<result column="Name" property="customerName" jdbcType="VARCHAR"/>
+    	<result column="Credit_level" property="customerCreditLevel" jdbcType="INTEGER"/>
+    	<result column="Comment" property="commentContent" jdbcType="VARCHAR"/>
+    	<result column="Level" property="commentLevel" jdbcType="INTEGER"/>
+    	<result column="comment_time" property="commentTime" jdbcType="VARCHAR"/>
+    	<result column="Status" property="commentStatus" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <!-- 评论分页数量 -->
+    <select id="commentCount"  parameterType="com.cont.model.CommentModel" resultType="java.lang.Integer">
+    	select COUNT(*)
+		from comment
+		WHERE comment.Goods_id=#{goodsId}
+    </select>
+    
+    <!-- 评论 分页展示详细 -->
+    <select id="commentDisplay"  parameterType="com.cont.model.CommentModel" resultMap="commentPageMap">
+		SELECT customer.`Name`,customer.Credit_level,`comment`.`Comment`,`Comment`.`Status`,`Comment`.`Level`,`comment`.comment_time
+		from customer,`comment`
+		WHERE `Comment`.Goods_id=#{goodsId} AND customer.Customer_id=`comment`.Customer_id
+		GROUP BY `comment`.comment_time DESC
+		LIMIT #{pageIndex}, #{pageSize}
+    </select>
+    
+    
+</mapper>

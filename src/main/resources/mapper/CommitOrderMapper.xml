@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cont.dao.CommitOrderDAO">
+    
+    <resultMap id="addressMap" type="com.cont.model.AddressModel">
+	    <result column="Address_id" property="addressId" jdbcType="INTEGER"/>
+	    <result column="Customer_id" property="customerId" jdbcType="INTEGER"/>
+	    <result column="Status" property="addressStatus" jdbcType="INTEGER"/>
+	    <result column="Address" property="addressLocation" jdbcType="VARCHAR"/>
+	    <result column="Cname" property="customerCname" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <!-- 顾客地址 -->
+    <select id="addressChosen"  parameterType="com.cont.model.AddressModel" resultMap="addressMap">
+		SELECT address.`Status`, address.Address, customer.`Name` as Cname
+		FROM address,customer
+		WHERE address.Customer_id=customer.Customer_id AND customer.Username=#{customerName}
+    </select>
+    
+    <!--  -->
+    <insert id="insertOrder">
+		INSERT
+		INTO orders(orders.Customer_id,orders.Order_condition,orders.create_time)
+		SELECT customer.Customer_id,'未发货',NOW()
+		FROM customer
+		WHERE customer.Username=#{username};
+    </insert>
+    
+    <!--  -->
+    <insert id="insertOrderDetail">
+		INSERT
+		INTO order_details(order_details.Order_id,order_details.Goods_id,order_details.Num,order_details.Sum_price)
+		SELECT MAX(ALL orders.Order_id),shopping_cart_details.Goods_id,shopping_cart_details.Num,shopping_cart_details.Price
+		FROM orders,customer,shopping_cart,shopping_cart_details
+		WHERE customer.Username=#{username} and orders.Customer_id=customer.Customer_id and shopping_cart.Customer_id=customer.Customer_id and shopping_cart.Shopping_cart_id=shopping_cart_details.Shopping_cart_id
+		GROUP BY shopping_cart_details.Shopping_cart_details_id
+    </insert>
+    
+    <delete id="deleteShoppingDetails">
+		DELETE 
+		FROM shopping_cart_details
+		WHERE shopping_cart_details.Shopping_cart_id=
+		(SELECT shopping_cart.Shopping_cart_id 
+		FROM customer,shopping_cart 
+		WHERE customer.Username=#{username} and customer.Customer_id=shopping_cart.Customer_id);
+    </delete>
+    
+    <delete id="deleteShopping">
+		DELETE 
+		FROM shopping_cart
+		WHERE shopping_cart.Customer_id=(SELECT customer.Customer_id FROM customer WHERE customer.Username=#{username});
+    </delete>
+    
+    <update id="updateGoods">
+    	UPDATE customer, shopping_cart, shopping_cart_details, goods
+    	SET goods.Stock=goods.Stock-Shopping_cart_details.Num
+    	WHERE customer.Username=#{username} and customer.Customer_id=shopping_cart.Customer_id 
+    		and shopping_cart.Shopping_cart_id=shopping_cart_details.Shopping_cart_id 
+    		and  goods.Goods_id = shopping_cart_details.Goods_id;
+    </update>
+    
+</mapper>

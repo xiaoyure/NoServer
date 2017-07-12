@@ -1,0 +1,13 @@
+$(document).ready(function(){
+	$.ajax({
+		url:"/NoServer/Api/Admin/alldisplay",
+		type:"get",
+		dataType:"json",
+		success:function(data){
+			$("#customerNum").text(data.customerNum);
+			$("#goodsNum").text(data.goodsNum);
+			$("#orderNum").text(data.orderNum);
+			$("#priceSum").text("￥"+data.priceSum);
+		},
+	})
+})

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cont.dao.GoodsDAO">
+	
+	<resultMap id="goodsResultMap" type="com.cont.model.GoodsModel">
+    	<id column="Goods_id" property="goodsId" jdbcType="INTEGER"/>
+    	<result column="Goods_image" property="goodsImage" jdbcType="VARCHAR"/>
+    	<result column="Name" property="goodsName" jdbcType="VARCHAR"/>
+    	<result column="Status" property="goodsState" jdbcType="INTEGER"/>
+    	<result column="Stock" property="goodsStock" jdbcType="INTEGER"/>
+    	<result column="Price" property="goodsPrice" jdbcType="DOUBLE"/>
+    	<result column="Category_id" property="goodsCategoryId" jdbcType="INTEGER"/>
+    	<result column="Goods_description" property="goodsDescription" jdbcType="VARCHAR"/>
+    </resultMap>
+	
+	<resultMap id="shoppingcartResultMap" type="com.cont.model.ShoppingGoodsModel">
+	    <result column="Goods_id" property="goodsId" jdbcType="INTEGER"/>
+	    <result column="Name" property="goodsName" jdbcType="VARCHAR"/>
+	    <result column="Price" property="goodsPrice" jdbcType="DOUBLE"/>
+	    <result column="Goods_image" property="goodsImage" jdbcType="VARCHAR"/>
+	    <result column="Num" property="goodsNum" jdbcType="INTEGER"/>
+    </resultMap>
+	
+	<!-- 商品上架 -->
+    <select id="goodsOnsell" resultType="com.cont.model.GoodsModel">
+    	insert into goods (Name, Status, Stock, Price, Category_id, Goods_image, Goods_description) values( #{goodsName},
+    			1, #{goodsStock}, #{goodsPrice}, #{goodsCategoryId}, #{goodsImage}, #{goodsDescription})
+    </select>
+    
+	<!-- 商品下架 -->
+	<select id="goodsSoldout" resultType="com.cont.model.GoodsModel">
+    	UPDATE goods
+		SET Status = 2
+		WHERE Goods_id = #{goodsId} and Status = 1;
+    </select>
+    
+    <!-- 商品展示 -->
+    <select id="goodsDisplay"  resultMap="goodsResultMap">
+    	select * from goods 
+    </select>
+    
+    <!-- 顾客商品展示，返回条目数 -->
+    <select id="selectCount"  parameterType="com.cont.model.GoodsModel" resultType="java.lang.Integer">
+    	select COUNT(*)
+		from goods
+		WHERE goods.`Name` LIKE #{goodsName} and goods.Category_id=#{goodsCategoryId}
+    </select>
+    
+    <!-- 顾客商品展示，返回商品 -->
+    <select id="backDisplay"  parameterType="com.cont.model.GoodsModel" resultMap="goodsResultMap">
+		SELECT goods.Goods_image,goods.Goods_id,goods.`Name`,goods.Price
+		from goods
+		WHERE  goods.`Name` LIKE #{goodsName} and goods.Category_id=#{goodsCategoryId}
+		ORDER BY goods.Price DESC
+		LIMIT #{pageIndex}, #{pageSize}
+    </select>
+    
+    <!-- 商品详情 -->
+    <select id="goodsDetailDisplay"  resultMap="goodsResultMap">
+    	SELECT goods.Goods_image, goods.`Name`, goods.Price, goods.Stock, goods.Goods_description
+		from goods
+		WHERE  goods.Goods_id = #{goodsId}
+    </select>
+    
+    <!-- 商品模糊搜索返回Id -->
+    <select id="goodsSearch" resultType="java.lang.String"  parameterType="java.lang.String">
+    	select Goods_id from goods where Name like '%${value}%'
+    </select>
+    
+ 	<!-- 通过商品Id返回列表 -->
+ 	<select id="goodsSearchDisplay" resultMap="goodsResultMap" parameterType="java.lang.String">
+ 		select * from goods where Goods_id = #{key}
+ 	</select>
+    
+    <!--客户购物车返回信息  -->
+    <select id="shoppingcartDisplay" resultMap="shoppingcartResultMap">
+    	SELECT goods.Goods_id,
+    			goods.Name,
+    			goods.Price,
+    			shopping_cart_details.Num,
+    			goods.Goods_image
+		FROM goods,shopping_cart_details,customer,shopping_cart
+		WHERE customer.Username=#{customerName} and customer.Customer_id=shopping_cart.Customer_id AND shopping_cart.Shopping_cart_id=shopping_cart_details.Shopping_cart_id AND goods.Goods_id=shopping_cart_details.Goods_id 
+    </select>
+
+    <!--  客户购物车删除商品-->
+    <select id="shoppingcartDelete" resultType="com.cont.model.ShoppingGoodsModel">
+    	DELETE
+		from shopping_cart_details
+		WHERE shopping_cart_details.Goods_id=#{shoppinggoodsId} and shopping_cart_details.Shopping_cart_id IN
+		(SELECT shopping_cart.Shopping_cart_id
+		from shopping_cart,customer
+		WHERE customer.Username=#{cus_username} and customer.Customer_id=shopping_cart.Customer_id);
+    </select>
+
+	<!-- 管理员商品下架双击变上架 -->
+    <update id="updateonsell">
+        UPDATE goods
+		SET Status = 1
+		WHERE Goods_id = #{goodsId} and Status = 2;
+    </update>
+   
+	<!--总展示 -->
+	<select id="customerNum" resultType = "INTEGER">
+		select count(*) from customer
+	</select>
+	<select id="goodsNum" resultType = "INTEGER">
+		select count(*) from goods
+	</select>
+    <select id="orderNum" resultType = "INTEGER">
+		select count(*) from orders
+	</select>
+	    <select id="sumNum" resultType = "INTEGER">
+		select SUM(Sum_price) from order_details 
+	</select>
+	
+    
+</mapper>

@@ -1,0 +1,1409 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>Details</title>
+		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!-- jQuery (necessary JavaScript plugins) -->
+		<script type='text/javascript' src="js/jquery-1.11.1.min.js"></script>
+		<!-- Custom Theme files -->
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<!-- Custom Theme files -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+		<script type="application/x-javascript">
+			addEventListener("load", function() {
+				setTimeout(hideURLbar, 0);
+			}, false);
+
+			function hideURLbar() {
+				window.scrollTo(0, 1);
+			}
+		</script>
+		<!-- start menu -->
+		<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+		<script type="text/javascript" src="js/megamenu.js"></script>
+		<script>
+			$(document).ready(function() {
+				$(".megamenu").megamenu();
+			});
+		</script>
+		<script src="js/menu_jquery.js"></script>
+		<link rel="stylesheet" href="css/etalage.css">
+		<script src="js/jquery.etalage.min.js"></script>
+		<script>
+			jQuery(document).ready(function($) {
+
+				$('#etalage').etalage({
+					thumb_image_width: 300,
+					thumb_image_height: 400,
+					source_image_width: 900,
+					source_image_height: 1200,
+					show_hint: true,
+					click_callback: function(image_anchor, instance_id) {
+						alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+					}
+				});
+
+			});
+		</script>
+		<!-- the jScrollPane script -->
+		<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+		<script type="text/javascript" id="sourcecode">
+			$(function() {
+				$('.scroll-pane').jScrollPane();
+			});
+		</script>
+		
+		<script src="js/details.js"></script>
+	</head>
+
+	<body>
+		<!-- header_top -->
+		<div class="top_bg">
+			<div class="container">
+				<div class="header_top">
+					<div class="top_left">
+					</div>
+					<div class="top_right">
+						<ul>
+							
+							<li class="login">
+								<div id="loginContainer">
+									<a href="#" id="loginButton"><span id="username">登陆</span></a>
+									<div id="loginBox">
+										<form id="loginForm">
+											<fieldset id="body">
+												<fieldset>
+													<label for="email">用户名</label>
+													<input type="text" name="email" id="email">
+												</fieldset>
+												<fieldset>
+													<label for="password">密码</label>
+													<input type="password" name="password" id="password">
+												</fieldset>
+												<input type="button" id="login" value="登陆">
+												<label for="checkbox"><input type="checkbox" id="checkbox"> <i>记住我</i></label>
+											</fieldset>
+											<span><a href="#">忘记密码</a></span>
+										</form>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+		<!-- header -->
+		<div class="header_bg">
+			<div class="container">
+				<div class="header">
+					<div class="logo">
+						<a href="index.html"><img src="images/logo.png" alt="" /> </a>
+					</div>
+					<!-- start header_right -->
+					<div class="header_right">
+						<div class="create_btn">
+							<a class="arrow" href="registration.html">注册账户<img src="images/right_arrow.png" alt="" /> </a>
+						</div>
+						<ul class="icon1 sub-icon1 profile_img">
+							<li><a class="active-icon c2" href="shoppingcart.html"> </a>
+								
+							</li>
+						</ul>
+						<ul class="icon1 sub-icon1 profile_img">
+							<li><a class="active-icon c1" href="favorites.html"> </a>
+								
+							</li>
+						</ul>
+						<div class="search">
+							<form>
+								<input type="text" value="" placeholder="搜索...">
+								<input type="button" value="" style="background: url(images/search.png) no-repeat 0px 1px;border: none;cursor: pointer;width: 24px;outline: none;position: absolute;height: 24px;top: 6px;right: 5px;">
+							</form>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<!-- start header menu -->
+					<ul class="megamenu skyblue">
+						<li>
+							<a class="color1" href="index.html">主页</a>
+						</li>
+						<li class="grid">
+							<a id="CATEGORY" class="color2" href="#">主板</a>
+							<div class="megapanel">
+								<div class="row">
+									<div class="col1">
+										<div class="h_nav">
+											<h4>品牌</h4>
+											<ul>
+												<li>
+													<a href="women.html">华硕</a>
+												</li>
+												<li>
+													<a href="women.html">技嘉</a>
+												</li>
+												<li>
+													<a href="women.html">微星</a>
+												</li>
+												<li>
+													<a href="women.html">华擎</a>
+												</li>
+												<li>
+													<a href="women.html">映泰</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>适用CPU接口</h4>
+											<ul>
+												<li>
+													<a href="women.html">AMD FM2+</a>
+												</li>
+												<li>
+													<a href="women.html">AMD AM3+</a>
+												</li>
+												<li>
+													<a href="women.html">INTEL 1150</a>
+												</li>
+												<li>
+													<a href="women.html">INTEL 1151</a>
+												</li>
+												<li>
+													<a href="women.html">AMD其他</a>
+												</li>
+												<li>
+													<a href="women.html">INTEL其他</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>板型</h4>
+											<ul>
+												<li>
+													<a href="women.html">ATX</a>
+												</li>
+												<li>
+													<a href="women.html">M-ATX</a>
+												</li>
+												<li>
+													<a href="women.html">MINI-ITX</a>
+												</li>
+												<li>
+													<a href="women.html">E-ATX</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>应用场景</h4>
+											<ul>
+												<li>
+													<a href="women.html">游戏优选</a>
+												</li>
+												<li>
+													<a href="women.html">家用/办公</a>
+												</li>
+												<li>
+													<a href="women.html">发烧超频</a>
+												</li>
+												<li>
+													<a href="women.html">工作站/服务器</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>游戏特色</h4>
+											<ul>
+												<li>
+													<a href="women.html">玩家国度ROG</a>
+												</li>
+												<li>
+													<a href="women.html">微星GAMING</a>
+												</li>
+												<li>
+													<a href="women.html">技嘉UD耐久</a>
+												</li>
+												<li>
+													<a href="women.html">技嘉GAMING</a>
+												</li>
+												<li>
+													<a href="women.html">技嘉AORUS</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>INTEL芯片</h4>
+											<ul>
+												<li>
+													<a href="women.html">H61</a>
+												</li>
+												<li>
+													<a href="women.html">H81</a>
+												</li>
+												<li>
+													<a href="women.html">B85</a>
+												</li>
+												<li>
+													<a href="women.html">X99</a>
+												</li>
+												<li>
+													<a href="women.html">H110</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col2"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a id="CATEGORY" class="color5" href="#">CPU</a>
+							<div class="megapanel">
+								<div class="row">
+									<div class="col1">
+										<div class="h_nav">
+											<h4>品牌</h4>
+											<ul>
+												<li>
+													<a href="women.html">英特尔</a>
+												</li>
+												<li>
+													<a href="women.html">AMD</a>
+												</li>
+												<li>
+													<a href="women.html">华硕</a>
+												</li>
+												<li>
+													<a href="women.html">戴尔</a>
+												</li>
+												<li>
+													<a href="women.html">外星人</a>
+												</li>
+												<li>
+													<a href="women.html">SHURE</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>系列</h4>
+											<ul>
+												<li>
+													<a href="women.html">haswell</a>
+												</li>
+												<li>
+													<a href="women.html">酷睿i7</a>
+												</li>
+												<li>
+													<a href="women.html">酷睿i5</a>
+												</li>
+												<li>
+													<a href="women.html">R5</a>
+												</li>
+												<li>
+													<a href="women.html">Skylake</a>
+												</li>
+												<li>
+													<a href="women.html">至强E3/E5</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>接口</h4>
+											<ul>
+												<li>
+													<a href="women.html">FM2</a>
+												</li>
+												<li>
+													<a href="women.html">FM2+</a>
+												</li>
+												<li>
+													<a href="women.html">AM4</a>
+												</li>
+												<li>
+													<a href="women.html">LGA 1150</a>
+												</li>
+												<li>
+													<a href="women.html">LGA 1151</a>
+												</li>
+												<li>
+													<a href="women.html">LGA 2011-V3</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>核心</h4>
+											<ul>
+												<li>
+													<a href="women.html">双核</a>
+												</li>
+												<li>
+													<a href="women.html">四核</a>
+												</li>
+												<li>
+													<a href="women.html">六核</a>
+												</li>
+												<li>
+													<a href="women.html">八核</a>
+												</li>
+												<li>
+													<a href="women.html">十核</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>游戏性能</h4>
+											<ul>
+												<li>
+													<a href="women.html">入门级</a>
+												</li>
+												<li>
+													<a href="women.html">发烧级</a>
+												</li>
+												<li>
+													<a href="women.html">骨灰级</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>类别</h4>
+											<ul>
+												<li>
+													<a href="women.html">游戏/影音</a>
+												</li>
+												<li>
+													<a href="women.html">家用/办公</a>
+												</li>
+												<li>
+													<a href="women.html">设计/影像</a>
+												</li>
+												<li>
+													<a href="women.html">发烧/超频</a>
+												</li>
+												<li>
+													<a href="women.html">工作站/服务器</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col2"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a id="CATEGORY" class="color6" href="#">内存</a>
+							<div class="megapanel">
+								<div class="row">
+									<div class="col1">
+										<div class="h_nav">
+											<h4>品牌</h4>
+											<ul>
+												<li>
+													<a href="women.html">金士顿</a>
+												</li>
+												<li>
+													<a href="women.html">海盗船</a>
+												</li>
+												<li>
+													<a href="women.html">威刚</a>
+												</li>
+												<li>
+													<a href="women.html">G.SKILL</a>
+												</li>
+												<li>
+													<a href="women.html">光威</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>单套容量</h4>
+											<ul>
+												<li>
+													<a href="women.html">1GB</a>
+												</li>
+												<li>
+													<a href="women.html">2GB</a>
+												</li>
+												<li>
+													<a href="women.html">4GB</a>
+												</li>
+												<li>
+													<a href="women.html">8GB</a>
+												</li>
+												<li>
+													<a href="women.html">16GB</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>频率</h4>
+											<ul>
+												<li>
+													<a href="women.html">DDR2</a>
+												</li>
+												<li>
+													<a href="women.html">DDR3 1333</a>
+												</li>
+												<li>
+													<a href="women.html">DDR3 1600</a>
+												</li>
+												<li>
+													<a href="women.html">DDR4 2400</a>
+												</li>
+												<li>
+													<a href="women.html">DDR4 2800</a>
+												</li>
+												<li>
+													<a href="women.html">DDR</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>平台</h4>
+											<ul>
+												<li>
+													<a href="women.html">台式机内存</a>
+												</li>
+												<li>
+													<a href="women.html">笔记本内存</a>
+												</li>
+												<li>
+													<a href="women.html">服务器内存</a>
+												</li>
+												<li>
+													<a href="women.html">系统制定内存</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>游戏性能</h4>
+											<ul>
+												<li>
+													<a href="women.html">入门级</a>
+												</li>
+												<li>
+													<a href="women.html">发烧级</a>
+												</li>
+												<li>
+													<a href="women.html">骨灰级</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>套条容量</h4>
+											<ul>
+												<li>
+													<a href="women.html">4GB*2</a>
+												</li>
+												<li>
+													<a href="women.html">4GB*4</a>
+												</li>
+												<li>
+													<a href="women.html">8GB*2</a>
+												</li>
+												<li>
+													<a href="women.html">8GB*4</a>
+												</li>
+												<li>
+													<a href="women.html">16GB*2</a>
+												</li>
+												<li>
+													<a href="women.html">16GB*4</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col2"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a id="CATEGORY" class="color7" href="#">硬盘</a>
+							<div class="megapanel">
+								<div class="row">
+									<div class="col1">
+										<div class="h_nav">
+											<h4>品牌</h4>
+											<ul>
+												<li>
+													<a href="women.html">希捷</a>
+												</li>
+												<li>
+													<a href="women.html">西部数据</a>
+												</li>
+												<li>
+													<a href="women.html">东芝</a>
+												</li>
+												<li>
+													<a href="women.html">HGST</a>
+												</li>
+												<li>
+													<a href="women.html">三星</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>容量</h4>
+											<ul>
+												<li>
+													<a href="women.html">1TB</a>
+												</li>
+												<li>
+													<a href="women.html">2TB</a>
+												</li>
+												<li>
+													<a href="women.html">4TB</a>
+												</li>
+												<li>
+													<a href="women.html">8TB</a>
+												</li>
+												<li>
+													<a href="women.html">1TB以下</a>
+												</li>
+												<li>
+													<a href="women.html">8TB以上</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>类型</h4>
+											<ul>
+												<li>
+													<a href="women.html">便携式存储</a>
+												</li>
+												<li>
+													<a href="women.html">SSD固态移动硬盘</a>
+												</li>
+												<li>
+													<a href="women.html">加密存储</a>
+												</li>
+												<li>
+													<a href="women.html">桌面存储</a>
+												</li>
+												<li>
+													<a href="women.html">硬盘周边产品</a>
+												</li>
+												<li>
+													<a href="women.html">网络存储</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>规格</h4>
+											<ul>
+												<li>
+													<a href="women.html">普通级硬盘</a>
+												</li>
+												<li>
+													<a href="women.html">笔记本硬盘</a>
+												</li>
+												<li>
+													<a href="women.html">企业级硬盘</a>
+												</li>
+												<li>
+													<a href="women.html">监控级硬盘</a>
+												</li>
+												<li>
+													<a href="women.html">NAS硬盘</a>
+												</li>
+												<li>
+													<a href="women.html">SSHD混合硬盘</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>接口</h4>
+											<ul>
+												<li>
+													<a href="women.html">SATA接口</a>
+												</li>
+												<li>
+													<a href="women.html">MSATA接口</a>
+												</li>
+												<li>
+													<a href="women.html">SAS接口</a>
+												</li>
+												<li>
+													<a href="women.html">以太网</a>
+												</li>
+												<li>
+													<a href="women.html">雷电</a>
+												</li>
+												<li>
+													<a href="women.html">其他接口</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>尺寸</h4>
+											<ul>
+												<li>
+													<a href="women.html">1.8英寸</a>
+												</li>
+												<li>
+													<a href="women.html">2.5英寸</a>
+												</li>
+												<li>
+													<a href="women.html">3.5英寸</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col2"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a id="CATEGORY" class="color8" href="#">显卡</a>
+							<div class="megapanel">
+								<div class="row">
+									<div class="col1">
+										<div class="h_nav">
+											<h4>品牌</h4>
+											<ul>
+												<li>
+													<a href="women.html">华硕</a>
+												</li>
+												<li>
+													<a href="women.html">技嘉</a>
+												</li>
+												<li>
+													<a href="women.html">七彩虹</a>
+												</li>
+												<li>
+													<a href="women.html">影驰</a>
+												</li>
+												<li>
+													<a href="women.html">索泰</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>显存容量</h4>
+											<ul>
+												<li>
+													<a href="women.html">1G</a>
+												</li>
+												<li>
+													<a href="women.html">2G</a>
+												</li>
+												<li>
+													<a href="women.html">3G</a>
+												</li>
+												<li>
+													<a href="women.html">4G</a>
+												</li>
+												<li>
+													<a href="women.html">6G</a>
+												</li>
+												<li>
+													<a href="women.html">8G</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>性能</h4>
+											<ul>
+												<li>
+													<a href="women.html">VR Ready</a>
+												</li>
+												<li>
+													<a href="women.html">游戏</a>
+												</li>
+												<li>
+													<a href="women.html">专业显卡</a>
+												</li>
+												<li>
+													<a href="women.html">发烧</a>
+												</li>
+												<li>
+													<a href="women.html">家用/办公</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>NVIDIA芯片</h4>
+											<ul>
+												<li>
+													<a href="women.html">GT730</a>
+												</li>
+												<li>
+													<a href="women.html">GTX1050</a>
+												</li>
+												<li>
+													<a href="women.html">GTX1080</a>
+												</li>
+												<li>
+													<a href="women.html">TITAN X</a>
+												</li>
+												<li>
+													<a href="women.html">TITAN Xp</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>AMD芯片</h4>
+											<ul>
+												<li>
+													<a href="women.html">R7 240</a>
+												</li>
+												<li>
+													<a href="women.html">R7 350</a>
+												</li>
+												<li>
+													<a href="women.html">RX 470</a>
+												</li>
+												<li>
+													<a href="women.html">RX 560</a>
+												</li>
+												<li>
+													<a href="women.html">RX 580</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>游戏性能</h4>
+											<ul>
+												<li>
+													<a href="women.html">入门级</a>
+												</li>
+												<li>
+													<a href="women.html">发烧级</a>
+												</li>
+												<li>
+													<a href="women.html">骨灰级</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col2"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a id="CATEGORY" class="color9" href="#">电源</a>
+							<div class="megapanel">
+								<div class="row">
+									<div class="col1">
+										<div class="h_nav">
+											<h4>品牌</h4>
+											<ul>
+												<li>
+													<a href="women.html">海盗船</a>
+												</li>
+												<li>
+													<a href="women.html">航嘉</a>
+												</li>
+												<li>
+													<a href="women.html">振华</a>
+												</li>
+												<li>
+													<a href="women.html">安钛克</a>
+												</li>
+												<li>
+													<a href="women.html">长城</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>功率</h4>
+											<ul>
+												<li>
+													<a href="women.html">300W以下</a>
+												</li>
+												<li>
+													<a href="women.html">301W-400W</a>
+												</li>
+												<li>
+													<a href="women.html">401W-500W</a>
+												</li>
+												<li>
+													<a href="women.html">501W-700W</a>
+												</li>
+												<li>
+													<a href="women.html">700W以上</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>电源类型</h4>
+											<ul>
+												<li>
+													<a href="women.html">非模组</a>
+												</li>
+												<li>
+													<a href="women.html">全模组</a>
+												</li>
+												<li>
+													<a href="women.html">半模组</a>
+												</li>
+												<li>
+													<a href="women.html">服务器电源</a>
+												</li>
+												<li>
+													<a href="women.html">数字电源</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>80PLUS标准</h4>
+											<ul>
+												<li>
+													<a href="women.html">金牌</a>
+												</li>
+												<li>
+													<a href="women.html">无牌</a>
+												</li>
+												<li>
+													<a href="women.html">铜牌</a>
+												</li>
+												<li>
+													<a href="women.html">白牌</a>
+												</li>
+												<li>
+													<a href="women.html">白金牌</a>
+												</li>
+												<li>
+													<a href="women.html">钛金牌</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>显卡供电接口</h4>
+											<ul>
+												<li>
+													<a href="women.html">单个</a>
+												</li>
+												<li>
+													<a href="women.html">两个</a>
+												</li>
+												<li>
+													<a href="women.html">三个以上</a>
+												</li>
+												<li>
+													<a href="women.html">无显卡供电接口</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>游戏性能</h4>
+											<ul>
+												<li>
+													<a href="women.html">入门级</a>
+												</li>
+												<li>
+													<a href="women.html">发烧级</a>
+												</li>
+												<li>
+													<a href="women.html">骨灰级</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col2"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+								</div>
+							</div>
+						</li>
+						<li class="active grid">
+							<a id="CATEGORY" class="color4" href="#">外设</a>
+							<div class="megapanel">
+								<div class="row">
+									<div class="col1">
+										<div class="h_nav">
+											<h4>品牌</h4>
+											<ul>
+												<li>
+													<a href="women.html">罗技</a>
+												</li>
+												<li>
+													<a href="women.html">雷柏</a>
+												</li>
+												<li>
+													<a href="women.html">ikbc</a>
+												</li>
+												<li>
+													<a href="women.html">CHERRY</a>
+												</li>
+												<li>
+													<a href="women.html">斐尔可</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>连接方式</h4>
+											<ul>
+												<li>
+													<a href="women.html">无线</a>
+												</li>
+												<li>
+													<a href="women.html">蓝牙</a>
+												</li>
+												<li>
+													<a href="women.html">有线</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>产品类型</h4>
+											<ul>
+												<li>
+													<a href="women.html">游戏</a>
+												</li>
+												<li>
+													<a href="women.html">办公</a>
+												</li>
+												<li>
+													<a href="women.html">静音</a>
+												</li>
+												<li>
+													<a href="women.html">充电</a>
+												</li>
+												<li>
+													<a href="women.html">人体工学</a>
+												</li>
+												<li>
+													<a href="women.html">轨迹球</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>特点</h4>
+											<ul>
+												<li>
+													<a href="women.html">镜面材质</a>
+												</li>
+												<li>
+													<a href="women.html">磨砂材质</a>
+												</li>
+												<li>
+													<a href="women.html">类肤材质</a>
+												</li>
+												<li>
+													<a href="women.html">左手适用型</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>背光效果</h4>
+											<ul>
+												<li>
+													<a href="women.html">单色背光</a>
+												</li>
+												<li>
+													<a href="women.html">多色背光</a>
+												</li>
+												<li>
+													<a href="women.html">RGB背光</a>
+												</li>
+												<li>
+													<a href="women.html">无</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+									<div class="col1">
+										<div class="h_nav">
+											<h4>游戏性能</h4>
+											<ul>
+												<li>
+													<a href="women.html">入门级</a>
+												</li>
+												<li>
+													<a href="women.html">发烧级</a>
+												</li>
+												<li>
+													<a href="women.html">骨灰级</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col2"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+									<div class="col1"></div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- content -->
+		<div class="container">
+			<div class="women_main">
+				<!-- start content -->
+				<div class="row single">
+					<div class="col-md-9" style="margin-left:10%;margin-right:10%;">
+						<div class="single_left">
+							<div class="grid images_3_of_2">
+								<ul id="etalage">
+									<li>
+										<a href="optionallink.html">
+											<img class="etalage_thumb_image" class="img-responsive" />
+											<img class="etalage_source_image" class="img-responsive" title="" />
+										</a>
+									</li>
+									<li>
+										<img class="etalage_thumb_image" class="img-responsive" />
+										<img class="etalage_source_image"  class="img-responsive" title="" />
+									</li>
+									<li>
+										<img class="etalage_thumb_image"  class="img-responsive" />
+										<img class="etalage_source_image"  class="img-responsive" />
+									</li>
+									<li>
+										<img class="etalage_thumb_image"  class="img-responsive" />
+										<img class="etalage_source_image"  class="img-responsive" />
+									</li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="desc1 span_3_of_2" style="text-align:center;">
+								<h3>英特尔（Intel）酷睿四核I7-7700k 盒装CPU处理器</h3>
+								<p>￥ 999 </p>
+								<div class="det_nav">
+									<h4>库存：</h4>
+									<P></P>
+								</div>
+								<div class="det_nav">
+									<h4>数量：</h4>
+									<input id="number" type="text" value="1" style="width:auto" />
+								</div>
+
+								<div class="btn_form">
+									<a href="#" id="purchase">购买</a>
+									<a href="#" id="addToCart">加入购物车</a>
+								</div>
+								<a href="#" id="collect"><span>登陆收藏 </span></a>
+
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="single-bottom1">
+							<h6>商品介绍</h6>
+							<p></p>
+						</div>
+						
+						<div class="single-bottom2">
+							<h6>用户评价</h6>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p></p>
+										
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p> </p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p> </p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p> </p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"> <p style="float: right;"></p></p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p> </p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p> </p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p> </p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p> </p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p> </p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p> </p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="product">
+								<div class="product-desc" style="width:100%;border-width:0 0px 0 0;border-right:0px solid #DDD;">
+									<div class="product-img">
+										<P style="text-align: center;"></P>
+										<p style="text-align: center;"></p>
+									</div>
+									<div class="prod1-desc">
+										<h5><a class="product_link" href="#"></a></h5>
+										<p class="product_descr"><p style="float: right;"></p></p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+
+							<div name="page">
+								<ul class="pagination" id="Page" style="float:right"></ul>
+							</div>
+						</div>
+					</div>
+					</div>
+					
+					<div class="clearfix"></div>
+				</div>
+				<!-- end content -->
+			</div>
+		</div>
+		<!-- footer_top -->
+		<!-- footer -->
+		<div class="footer">
+			<div class="container">
+				<div class="copy">
+					<p class="link">Copyright &copy; 2017.WANGZAOHUA All rights reserved.
+						<a target="_blank" href="http://sc.chinaz.com/moban/"></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
